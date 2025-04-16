@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Uploader</title>
+  <style>
+    .uploader-container {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 300px;
+    }
+    .file-list {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="uploader-container">
+    <h3>My Custom Uploader</h3>
+    <input type="file" id="fileInput" multiple />
+    <button id="btnProcess">Processar e Enviar</button>
+    <div class="file-list" id="fileList"></div>
+  </div>
+
+  <script>
+    let selectedFiles = [];
+    const fileInput = document.getElementById("fileInput");
+    const fileListDiv = document.getElementById("fileList");
+    const btnProcess = document.getElementById("btnProcess");
+
+    fileInput.addEventListener("change", function() {
+      selectedFiles = Array.from(fileInput.files);
+      fileListDiv.innerHTML = "";
+      selectedFiles.forEach(file => {
+        const p = document.createElement("p");
+        p.textContent = file.name + " (" + file.type + ")";
+        fileListDiv.appendChild(p);
+      });
+      console.log("[Custom Element] Arquivos selecionados:", selectedFiles);
+    });
+
+    btnProcess.addEventListener("click", async function() {
+      if (selectedFiles.length === 0) {
+        alert("Selecione arquivos antes de enviar.");
+        return;
+      }
+      alert("Aqui você implementaria a lógica de enviar via JSW ou HTTP Function");
+    });
+  </script>
+</body>
+</html>
